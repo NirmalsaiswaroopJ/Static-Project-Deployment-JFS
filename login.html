@@ -392,7 +392,7 @@
                 <p>Sign in to continue</p>
             </div>
             
-            <form id="loginForm" action="#" method="post">
+            <form id="loginForm" action="#" method="#">
                 <div class="input-group">
                     <input type="text" class="form-control" id="username" name = "username" placeholder=" " required>
                     <label class="form-label" for="username">Username</label>
@@ -464,7 +464,7 @@
             document.querySelector('.success-animation').style.display = 'flex';
             
             setTimeout(() => {
-                window.location.href = '/userhomepage'; // Redirect to user homepage
+                window.location.href = 'userhomepage.html'; // Redirect to user homepage
             }, 1500);
         } else {
             const data = await response.json();
