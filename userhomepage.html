@@ -248,7 +248,7 @@
 
         <div id="findBuddySection" class="section">
             <h2>Find Your Buddy</h2>
-            <form id="findBuddyForm" onsubmit="searchBuddies(event)">
+            <form id="findBuddyForm">
                 <div class="form-group">
                     <label for="city">Select City</label>
                     <select id="city" name="city" required>
@@ -391,29 +391,9 @@
         }
 
         async function submitListing(event) {
-            event.preventDefault();
-
-            const form = document.getElementById('postListingForm');
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch('/room', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
-                });
-
-                if (response.ok) {
-                    window.location.href = "success1.html";
-                    form.reset();
-                } else {
-                    const data = await response.text();
-                    throw new Error(data || "Failed to submit listing");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert(error.message || "Failed to submit listing. Please try again.");
-            }
+            
+            window.location.href = "success1.html";
+            form.reset();
         }
 
         async function searchBuddies(event) {
