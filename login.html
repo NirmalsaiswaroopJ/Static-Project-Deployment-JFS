@@ -6,6 +6,7 @@
     <title>Login | RoomBuddy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* All existing styles remain exactly the same */
         :root {
             --primary: #FF3008;
             --secondary: #1D1D1D;
@@ -70,7 +71,7 @@
             100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
         }
 
-        /* Floating shapes */
+        /* All other existing styles remain exactly the same */
         .shapes {
             position: absolute;
             top: 0;
@@ -131,7 +132,6 @@
             75% { transform: translate(-40px, -50px) rotate(270deg) scale(1.1); }
         }
 
-        /* Grid pattern overlay */
         .grid {
             position: fixed;
             width: 100%;
@@ -148,7 +148,6 @@
             100% { transform: translateX(-30px) translateY(-30px); }
         }
 
-        /* Glowing orbs */
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -392,22 +391,22 @@
                 <p>Sign in to continue</p>
             </div>
             
-            <form id="loginForm" action="#" method="#">
+            <form id="loginForm">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="username" name = "username" placeholder=" ">
+                    <input type="text" class="form-control" id="username" name="username" placeholder=" ">
                     <label class="form-label" for="username">Username</label>
                 </div>
                 
                 <div class="input-group">
-                    <input type="password" class="form-control" id="password" name = "password" placeholder=" ">
+                    <input type="password" class="form-control" id="password" name="password" placeholder=" ">
                     <label class="form-label" for="password">Password</label>
                 </div>
                 
-                <a href="userhomepage.html"><button type="submit" class="login-btn">Sign In</button></a>
+                <button type="submit" class="login-btn">Sign In</button>
             </form>
             
             <div class="register-link">
-                <p>Don't have an account? <a href="register.html">Register</a></p>
+                <p>Don't have an account? <a href="#" onclick="showSuccessMessage('register.html')">Register</a></p>
             </div>
 
             <div class="success-animation">
@@ -439,38 +438,48 @@
             card.style.transform = 'rotateY(0deg) rotateX(0deg)';
         });
 
-        // Form submission
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+        // Function to show success animation and redirect
+        function showSuccessMessage(redirectUrl) {
+            const successAnimation = document.querySelector('.success-animation');
+            successAnimation.style.display = 'flex';
+            
+            setTimeout(() => {
+                window.location.href = redirectUrl || 'success.html';
+            }, 1500);
+        }
 
-    const form = e.target;
-    const formData = new FormData(form);
-    const params = new URLSearchParams(formData);
-    const button = form.querySelector('.login-btn');
-    button.style.transform = 'scale(0.95)';
+        // Static form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const button = e.target.querySelector('.login-btn');
+            
+            // Add button press animation
+            button.style.transform = 'scale(0.95)';
 
-    try {
-        const response = await fetch('/login', {
-            method: 'POST',
-            body: new URLSearchParams(formData), // Send form data as URL-encoded
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            // Simple validation
+            if (username && password) {
+                // Show success animation and redirect
+                button.style.background = 'var(--success)';
+                button.textContent = 'Success!';
+                
+                // Show checkmark animation
+                showSuccessMessage();
+            } else {
+                // Show error state
+                button.style.background = '#dc3545';
+                button.textContent = 'Please fill all fields';
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.style.background = 'var(--primary)';
+                    button.textContent = 'Sign In';
+                    button.style.transform = 'scale(1)';
+                }, 2000);
             }
         });
-
-       
-    } catch (error) {
-        button.style.background = '#dc3545';
-        button.textContent = error.message || 'Login Failed';
-
-        setTimeout(() => {
-            button.style.background = 'var(--primary)';
-            button.textContent = 'Sign In';
-            button.style.transform = 'scale(1)';
-        }, 2000);
-    }
-});
-
 
         // Input focus effect
         document.querySelectorAll('.form-control').forEach(input => {
