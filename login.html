@@ -394,12 +394,12 @@
             
             <form id="loginForm" action="#" method="#">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="username" name = "username" placeholder=" " required>
+                    <input type="text" class="form-control" id="username" name = "username" placeholder=" ">
                     <label class="form-label" for="username">Username</label>
                 </div>
                 
                 <div class="input-group">
-                    <input type="password" class="form-control" id="password" name = "password" placeholder=" " required>
+                    <input type="password" class="form-control" id="password" name = "password" placeholder=" ">
                     <label class="form-label" for="password">Password</label>
                 </div>
                 
@@ -458,19 +458,7 @@
             }
         });
 
-        if (response.ok) {
-            // Successful login
-            form.style.opacity = '0.5';
-            document.querySelector('.success-animation').style.display = 'flex';
-            
-            setTimeout(() => {
-                window.location.href = 'userhomepage.html'; // Redirect to user homepage
-            }, 1500);
-        } else {
-            const data = await response.json();
-            alert("Invalid username or password");
-            throw new Error(data.message || 'Login Failed');
-        }
+       
     } catch (error) {
         button.style.background = '#dc3545';
         button.textContent = error.message || 'Login Failed';
