@@ -273,16 +273,16 @@
 
         <div id="postListingSection" class="section">
             <h2>Post Your Listing</h2>
-            <form id="postListingForm">
+            <form id="postListingForm" action="success1.html">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" name="fullName">
+                    <input type="text" id="fullName" name="fullName" required>
                     <div class="error" id="nameError">Please enter your name</div>
                 </div>
         
                 <div class="form-group">
                     <label for="listingCity">City</label>
-                    <select id="listingCity" name="city">
+                    <select id="listingCity" name="city" required>
                         <option value="">Select a city</option>
                         <option value="Hyderabad">Hyderabad</option>
                         <option value="Surat">Surat</option>
@@ -298,24 +298,24 @@
         
                 <div class="form-group">
                     <label for="rent">Monthly Rent (₹)</label>
-                    <input type="number" id="rent" name="rent" min="0">
+                    <input type="number" id="rent" name="rent" min="0" required>
                     <div class="error" id="budgetError">Please enter a valid budget</div>
                 </div>
         
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description"></textarea>
+                    <textarea id="description" name="description" required></textarea>
                     <div class="error" id="descriptionError">Please enter a description</div>
                 </div>
         
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone">
+                    <input type="tel" id="phone" name="phone" required>
                     <div class="error" id="phoneError">Please enter a valid phone number</div>
                 </div>
         
                 <button type="button" class="back-btn" onclick="showMainOptions()">Back</button>
-                <a href = "success1.html"><button type="submit" class="submit-btn">Submit Listing</button></a>
+                <button type="submit" class="submit-btn">Submit Listing</button>
             </form>
         </div>
     </div>
