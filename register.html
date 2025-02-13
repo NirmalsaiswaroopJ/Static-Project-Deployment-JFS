@@ -239,7 +239,7 @@
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
-            <form id="registerForm" action="#" method="post">
+            <form id="registerForm" action="success.html" method="post">
             
                 <div class="input-group">
                     <input type="text" class="form-control" id="username" name="username" placeholder=" " required>
@@ -264,9 +264,9 @@
                 <div class="success-checkmark">
                     <div class="check-icon"></div>
                 </div>
-                <a href="success.html" class="login-link">
+                
                 <button type="submit" class="submit-btn w-100">Create Account</button>
-                </a>
+                
             </form>
             <p class="text-center mt-4">Already have an account? <a href="login.html" class="login-link">Login</a></p>
         </div>
@@ -294,16 +294,12 @@
         inputs.forEach(input => {
             input.addEventListener('input', updateProgress);
         });
-```
-        form.addEventListener('submit', async function(event) {
-    event.preventDefault();
-
-    const formData = new FormData(this);
-
-    const password = formData.get('password');
-    const confirmPassword = formData.get('confirmPassword');
+        form.addEventListener('submit', function(event) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
 
     if (password !== confirmPassword) {
+        event.preventDefault();
         const btn = form.querySelector('.submit-btn');
         btn.style.background = '#dc3545';
         btn.innerText = 'Passwords Do Not Match';
@@ -313,34 +309,8 @@
         }, 2000);
         return;
     }
-
-    try {
-        const response = await fetch('/register', {
-            method: 'POST',
-            body: new URLSearchParams(formData) // 🔄 Convert FormData to URL-encoded format
-        });
-
-        if (response.ok) {
-            form.style.opacity = '0.5';
-            document.querySelector('.success-checkmark').style.display = 'block';
-            setTimeout(() => {
-                window.location.href = '/success';
-            }, 2000);
-        } else {
-            const data = await response.json();
-            throw new Error(data.message);
-        }
-    } catch (error) {
-        const btn = form.querySelector('.submit-btn');
-        btn.style.background = '#dc3545';
-        btn.innerText = error.message || 'Registration Failed';
-        setTimeout(() => {
-            btn.style.background = 'var(--primary)';
-            btn.innerText = 'Create Account';
-        }, 2000);
-    }
+    // If passwords match, form will submit to success.html
 });
-```
 
         // 3D tilt effect
         const card = document.querySelector('.form-card');
